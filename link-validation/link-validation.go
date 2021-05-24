@@ -29,13 +29,10 @@ func classifyLinks(links []string, URL string) ([]string, []string) {
 		linkHost := u.Host
 		if linkHost == "" {
 			link = baseURL + link
-			log.Println("appending internal link : " + link)
 			internalLinks = append(internalLinks, link)
 		} else if strings.Contains(linkHost, baseHost) {
-			log.Println("appending internal link : " + link)
 			internalLinks = append(internalLinks, link)
 		} else {
-			log.Println("appending external link : " + link)
 			externalLinks = append(externalLinks, link)
 		}
 	}
@@ -46,20 +43,18 @@ func checkLinkAccessibility(links []string) []string {
 	nonAccessibleLinks := make([]string, 0)
 	c := make(chan pageFetcher.PageAccessibilityStatus)
 	for _, link := range links {
-		log.Println(link)
 		go pageFetcher.CheckPageAccessibility(link, c)
 	}
 
 	for i := 0; i < len(links); i++ {
-		log.Println(i + 1)
 		accessibilityStatus := <-c
-		log.Println(accessibilityStatus.URL)
-		log.Println(accessibilityStatus.StatusCode)
-		log.Println(accessibilityStatus.Error)
 		url := accessibilityStatus.URL
 		statusCode := accessibilityStatus.StatusCode
 		err := accessibilityStatus.Error
 		if (statusCode != 200 && statusCode != 201) || err != nil {
+			log.Println("[WARN] Link not accessible")
+			log.Println(accessibilityStatus.URL)
+			log.Println(accessibilityStatus.StatusCode)
 			nonAccessibleLinks = append(nonAccessibleLinks, url)
 		}
 	}
