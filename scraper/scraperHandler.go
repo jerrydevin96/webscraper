@@ -9,54 +9,38 @@ import (
 	"github.com/jerrydevin96/webscraper/pageFetcher"
 )
 
-var (
-	Title  = ""
-	H1List = make([]string, 0)
-	H2List = make([]string, 0)
-	H3List = make([]string, 0)
-	H4List = make([]string, 0)
-	H5List = make([]string, 0)
-	H6List = make([]string, 0)
-	Links  = make([]string, 0)
-)
-
-func getTitleCollyHTMLCallBack(h *colly.HTMLElement) {
-	Title = h.Text
-}
-
-func getH1CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H1List = append(H1List, header)
-}
-
-func getH2CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H2List = append(H2List, header)
-}
-
-func getH3CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H3List = append(H3List, header)
-}
-
-func getH4CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H4List = append(H4List, header)
-}
-
-func getH5CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H5List = append(H5List, header)
-}
-
-func getH6CollyHTMLCallBack(h *colly.HTMLElement) {
-	header := h.Text
-	H6List = append(H6List, header)
-}
-
-func getLinksCollyHTMLCallBack(h *colly.HTMLElement) {
-	link := h.Attr("href")
-	Links = append(Links, link)
+func registerCollyHandlers(c *colly.Collector, details *WebPageDetails) {
+	c.OnHTML("head title", func(h *colly.HTMLElement) {
+		details.Title = h.Text
+	})
+	c.OnHTML("body h1", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H1 = append(details.H1, header)
+	})
+	c.OnHTML("body h2", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H2 = append(details.H2, header)
+	})
+	c.OnHTML("body h3", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H3 = append(details.H3, header)
+	})
+	c.OnHTML("body h4", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H4 = append(details.H4, header)
+	})
+	c.OnHTML("body h5", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H5 = append(details.H5, header)
+	})
+	c.OnHTML("body h6", func(h *colly.HTMLElement) {
+		header := h.Text
+		details.H6 = append(details.H6, header)
+	})
+	c.OnHTML("a[href]", func(h *colly.HTMLElement) {
+		link := h.Attr("href")
+		details.Links = append(details.Links, link)
+	})
 }
 
 func getHTMLVersionHandler(URL string) (string, error) {

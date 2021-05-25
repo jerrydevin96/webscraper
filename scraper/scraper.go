@@ -23,26 +23,12 @@ func FetchWebPageDetails(URL string) *WebPageDetails {
 	response := &WebPageDetails{}
 	versionChannel := make(chan string)
 	c := colly.NewCollector()
-	c.OnHTML("head title", getTitleCollyHTMLCallBack)
-	c.OnHTML("body h1", getH1CollyHTMLCallBack)
-	c.OnHTML("body h2", getH2CollyHTMLCallBack)
-	c.OnHTML("body h3", getH3CollyHTMLCallBack)
-	c.OnHTML("body h4", getH4CollyHTMLCallBack)
-	c.OnHTML("body h5", getH5CollyHTMLCallBack)
-	c.OnHTML("body h6", getH6CollyHTMLCallBack)
-	c.OnHTML("a[href]", getLinksCollyHTMLCallBack)
+	registerCollyHandlers(c, response)
 	go getHTMLVersion(URL, versionChannel)
 	c.Visit(URL)
 	version := <-versionChannel
-	response.Title = Title
-	response.H1 = H1List
-	response.H2 = H2List
-	response.H3 = H3List
-	response.H4 = H4List
-	response.H5 = H5List
-	response.H6 = H6List
-	response.Links = Links
 	response.Version = version
+	log.Println(response)
 	return response
 }
 
