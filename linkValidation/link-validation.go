@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	pageFetcher "github.com/jerrydevin96/webscraper/page-fetcher"
+	"github.com/jerrydevin96/webscraper/pageFetcher"
 )
 
 type ValidatedLinks struct {

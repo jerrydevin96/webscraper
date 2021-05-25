@@ -6,7 +6,7 @@ import (
 	"regexp"
 
 	"github.com/gocolly/colly"
-	pageFetcher "github.com/jerrydevin96/webscraper/page-fetcher"
+	"github.com/jerrydevin96/webscraper/pageFetcher"
 )
 
 var (

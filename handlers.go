@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 
-	linkValidation "github.com/jerrydevin96/webscraper/link-validation"
+	"github.com/jerrydevin96/webscraper/linkValidation"
 	"github.com/jerrydevin96/webscraper/scraper"
 )
 
