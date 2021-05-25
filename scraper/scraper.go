@@ -28,7 +28,6 @@ func FetchWebPageDetails(URL string) *WebPageDetails {
 	c.Visit(URL)
 	version := <-versionChannel
 	response.Version = version
-	log.Println(response)
 	return response
 }
 
