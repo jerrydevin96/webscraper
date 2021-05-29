@@ -73,7 +73,7 @@ func processHTMLForVersion(HTML string) (string, error) {
 		if htmlHeader == `<!DOCTYPE html>` || htmlHeader == `<!doctype html>` {
 			version = "HTML 5"
 		} else {
-			versions := regexMatcher(htmlHeader, "(HTML|XHTML) ([1-9].[0-9][0-9]|[1-9])")
+			versions := regexMatcher(htmlHeader, "(HTML|XHTML) ([1-9].([0-9][0-9]|[1-9]))")
 			if versions == nil {
 				log.Println("No matches.")
 				return "", errors.New("no matches found for html version")

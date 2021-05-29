@@ -1,3 +1,5 @@
 *.exe
 test-links.txt
 *.test
+profile.cov
+cover.html

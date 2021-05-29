@@ -55,6 +55,7 @@ func TestProcessHTMLForVersion(t *testing.T) {
 		if version != testData.version {
 			t.Log(testData.html)
 			t.Log("expected HTML version " + testData.version + " but function returned " + version)
+			t.FailNow()
 		}
 	}
 }
@@ -78,6 +79,7 @@ func TestGetHTMLVersionHandler(t *testing.T) {
 		if version != testData.version {
 			t.Log(testData.html)
 			t.Log("expected HTML version " + testData.version + " but function returned " + version)
+			t.FailNow()
 		}
 	}
 }
