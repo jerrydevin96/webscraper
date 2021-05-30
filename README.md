@@ -39,10 +39,10 @@ The links extracted from the webpage are checked for accessibility using net/htt
 The application is packaged into a docker image and is available as a open image in docker hub. To pull and  run the image, use the below command:
 
 ```shell
-docker run -d -p 8080:8080 jerrydevin96/webscraper:v0.2.0
+docker run -d -p 8080:8080 jerrydevin96/webscraper:latest
 ```
 
-The above command will pull and run the MVP version of the webscraper on port 8080. Pre requisite here is that docker needs to be installed in the host and port 8080 should be free and accessible. To deploy the latest version, check for the latest image in the releases section of the repo.
+The above command will pull and run the latest stable version (v1.0.0) of the webscraper on port 8080. Pre requisite here is that docker needs to be installed in the host and port 8080 should be free and accessible. To deploy the latest version, check for the latest image in the releases section of the repo.
 
 ##### Testing:
 
@@ -52,7 +52,7 @@ The application exposes one API endpoint. To test the API, use any tool like pos
 
 ###### End Point Specs:
 
-**End Point: ** /v0/PageDetails
+**End Point: ** http://<host:port>/v0/PageDetails
 
 **End Point Method: ** POST
 
